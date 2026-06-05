@@ -1,0 +1,4 @@
+test-fixtures/_rendered-sample.html
+.playwright-mcp/
+*.pyc
+__pycache__/

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business idea assessment</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#666; --go:#2e7d32; --cond:#f9a825; --pass:#c62828; --bg:#fafafa; }
+  body { font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); background:var(--bg); margin:0; }
+  main { max-width:900px; margin:0 auto; padding:2rem; }
+  .hero { padding:2rem; border-radius:14px; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .verdict { font-size:2rem; font-weight:700; }
+  .score { font-size:3rem; font-weight:800; transition:all .6s ease; }
+  .axis { display:flex; align-items:center; gap:.75rem; margin:.35rem 0; }
+  .axis .bar { height:14px; background:#e0e0e0; border-radius:7px; flex:1; overflow:hidden; }
+  .axis .fill { height:100%; width:0; background:#3949ab; transition:width .6s ease; }
+  .lens-toggle button { margin-right:.5rem; padding:.3rem .7rem; cursor:pointer; }
+  .tier2 { margin-top:2rem; } /* flexible region populated at generation time */
+  .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="verdict" data-role="verdict">—</div>
+    <div class="score" data-role="score">—</div>
+    <p class="muted" data-role="why"></p>
+  </section>
+
+  <section class="lens-toggle" aria-label="lens">
+    <button data-lens="investor">Investor</button>
+    <button data-lens="founder">Founder</button>
+    <button data-lens="operator">Operator</button>
+    <button data-lens="consultant">Consultant</button>
+  </section>
+
+  <section data-role="scorecard" aria-label="scorecard"></section>
+
+  <section data-role="kill-risks" aria-label="kill risks"></section>
+  <section data-role="must-be-true" aria-label="must be true"></section>
+  <section data-role="integrity" aria-label="integrity" class="muted"></section>
+
+  <!-- Tier-2 content-driven visuals are inserted here at generation time -->
+  <section class="tier2" data-role="tier2"></section>
+</main>
+
+<script>
+  // The skill replaces the marker below with the verified dossier JSON at generation time.
+  const DOSSIER = /*__DOSSIER_DATA__*/null;
+
+  const AXIS_LABELS = {
+    market_pull:"Is the pain real and widespread?",
+    demand_evidence:"Is there proven willingness to pay?",
+    gtm:"Can you reach buyers affordably?",
+    moat:"What stops a competitor copying you?",
+    unit_economics:"Does the per-customer math work?",
+    scalability:"Can it get big enough to matter?",
+    regulatory:"Can a regulator switch it off?",
+    why_now:"What makes this the right moment?",
+    founder_fit:"Do you have an unfair right to win?",
+    capital_path:"Is it fundable to the next step?"
+  };
+
+  function render(d) {
+    if (!d) return;
+    const v = document.querySelector('[data-role=verdict]');
+    v.textContent = d.verdict;
+    v.style.color = d.verdict==='GO' ? 'var(--go)' : d.verdict==='PASS' ? 'var(--pass)' : 'var(--cond)';
+    const s = document.querySelector('[data-role=score]');
+    s.textContent = d.adjusted + ' / 100';
+    document.querySelector('[data-role=why]').textContent = d.why || '';
+
+    const sc = document.querySelector('[data-role=scorecard]');
+    sc.innerHTML = '';
+    for (const [k, val] of Object.entries(d.axes || {})) {
+      const row = document.createElement('div'); row.className = 'axis';
+      row.innerHTML = '<span style="width:16rem">'+(AXIS_LABELS[k]||k)+'</span>'
+        + '<span class="bar"><span class="fill"></span></span><strong>'+val+'</strong>';
+      sc.appendChild(row);
+      requestAnimationFrame(() => { row.querySelector('.fill').style.width = Math.min(100, val*4)+'%'; });
+    }
+    fillList('[data-role=kill-risks]', 'Most likely to sink it', d.kill_risks);
+    fillList('[data-role=must-be-true]', 'Must be true', d.must_be_true);
+    document.querySelector('[data-role=integrity]').textContent =
+      d.integrity ? ('What we could not fully verify: ' + d.integrity) : '';
+  }
+  function fillList(sel, title, items) {
+    const el = document.querySelector(sel); el.innerHTML = '';
+    if (!items || !items.length) return;
+    const h = document.createElement('h3'); h.textContent = title; el.appendChild(h);
+    const ul = document.createElement('ul');
+    items.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    el.appendChild(ul);
+  }
+  document.querySelectorAll('.lens-toggle button').forEach(b =>
+    b.addEventListener('click', () => {
+      // At generation time the skill embeds per-lens axis sets; the shell re-renders.
+      if (DOSSIER && DOSSIER.lenses && DOSSIER.lenses[b.dataset.lens]) render(DOSSIER.lenses[b.dataset.lens]);
+    }));
+  render(DOSSIER);
+</script>
+</body>
+</html>

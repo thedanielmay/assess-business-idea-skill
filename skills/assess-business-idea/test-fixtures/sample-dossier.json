@@ -1,0 +1,7 @@
+{"idea":"Sample Idea","lens":"investor","raw":68,"multiplier":0.85,"adjusted":58,
+ "verdict":"CONDITIONAL","why":"Real pain and workable economics, but the path to reach buyers is unproven.",
+ "axes":{"market_pull":13,"demand_evidence":11,"gtm":7,"moat":8,"unit_economics":9,
+ "scalability":7,"regulatory":6,"why_now":5,"founder_fit":2,"capital_path":4},
+ "kill_risks":["No proven affordable way to reach buyers","Incumbent can copy within a year"],
+ "must_be_true":["Buyers will switch from spreadsheets","One channel stays under target cost"],
+ "integrity":"Demand evidence is founder-reported and not yet independently verified."}
