@@ -2,3 +2,4 @@ test-fixtures/_rendered-sample.html
 .playwright-mcp/
 *.pyc
 __pycache__/
+.DS_Store
