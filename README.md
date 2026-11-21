@@ -58,6 +58,18 @@ verify-and-integrity → finalize → optional interactive HTML report.
 Every parameter follows one rule: if you specified it, it's used; if you were silent,
 the skill asks before launching.
 
+## Install
+
+Install from the marketplace in this repo:
+
+    /plugin install assess-business-idea --marketplace thedanielmay/assess-business-idea-skill
+
+Or link a local checkout into your skills folder:
+
+    ln -s ~/projects/agent-tools/skills/assess-business-idea-skill/skills/assess-business-idea ~/.claude/skills/assess-business-idea
+
+Changes are in [CHANGELOG.md](CHANGELOG.md).
+
 ## Principles
 
 - Founder claims always enter as hypotheses to verify, never as facts.

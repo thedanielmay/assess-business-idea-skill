@@ -3,3 +3,4 @@ test-fixtures/_rendered-sample.html
 *.pyc
 __pycache__/
 .DS_Store
+*.bak*

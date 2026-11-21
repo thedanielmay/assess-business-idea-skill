@@ -1,7 +1,20 @@
 {
   "name": "assess-business-idea",
-  "description": "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Thin orchestrator that delegates research and adversarial critique to other skills, applies a business framework spine, scores ten weighted dimensions per lens, verifies its own output, and produces a cited dossier plus an optional interactive HTML report.",
-  "version": "1.0.0",
-  "author": { "name": "Daniel May", "email": "daniel@thedanielmay.com" },
-  "keywords": ["assess-business-idea", "startup", "validation", "pitch", "vc", "market-research", "due-diligence", "scorecard"]
+  "version": "1.1.0",
+  "description": "Evidence-based assessment of a business idea or pitch: researches the market, scores ten weighted dimensions per lens, checks its own output and produces a cited dossier.",
+  "author": {
+    "name": "Daniel May",
+    "url": "https://github.com/thedanielmay"
+  },
+  "homepage": "https://github.com/thedanielmay/assess-business-idea-skill",
+  "repository": "https://github.com/thedanielmay/assess-business-idea-skill",
+  "license": "MIT",
+  "keywords": [
+    "startup",
+    "validation",
+    "pitch",
+    "market-research",
+    "due-diligence",
+    "scorecard"
+  ]
 }

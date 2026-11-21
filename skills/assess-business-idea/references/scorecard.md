@@ -8,7 +8,9 @@
 5. Unit economics — does the per-customer math work?
 6. Scalability — can it get big enough to matter?
 7. Regulatory / legal — can a regulator switch it off?
-8. Why-now / timing — what changed to make this inevitable now?
+8. Why-now / timing — what changed to make this inevitable now? (Judges the timing
+   context described in Phase 0.5 Characterize — this axis SCORES it; Characterize only
+   describes it.)
 9. Founder-fit — do you have an unfair right to win?
 10. Capital / financing path — fundable to the next proof point?
 

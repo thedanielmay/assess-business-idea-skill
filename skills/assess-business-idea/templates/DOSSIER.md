@@ -11,6 +11,12 @@ here; full reasoning follows.
 ## Idea Brief (normalized input)
 Claims vs. to-verify, problem, customer, solution, model, competitors, gaps.
 
+## Characterize (describe before judging)
+Product description (what it is, how it works); customers (buyer ≠ user, segmented);
+landscape placement; why-now / timing context; initial risk register. Each element
+tagged founder-stated-to-verify vs. our-characterization. Full detail in
+characterize.md. {{CHARACTERIZE_SUMMARY}}
+
 ## Phase 1 — Triage
 R-W-W screen and fast legality screen. {{TRIAGE_RESULT}}
 
