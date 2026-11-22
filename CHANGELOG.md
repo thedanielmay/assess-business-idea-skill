@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 - 2026-11-22
+
+- Removed the duplicate root `SKILL.md`. The skill now lives only in `skills/assess-business-idea/SKILL.md`.
+
 ## 1.1.0 - 2026-11-22
 
 - Phase 0.5 CHARACTERIZE: describe the product, customer, landscape, timing and an initial risk register before judging (`references/characterize.md`, `templates/CHARACTERIZE.md`). Phase 5 now enriches that risk register.
