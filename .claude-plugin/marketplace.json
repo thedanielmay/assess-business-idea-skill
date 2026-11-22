@@ -4,6 +4,9 @@
     "name": "Daniel May",
     "url": "https://github.com/thedanielmay"
   },
+  "metadata": {
+    "description": "Evidence-based assessment of a business idea or pitch: researches the market, scores ten weighted dimensions per lens, checks its own output and produces a cited dossier."
+  },
   "plugins": [
     {
       "name": "assess-business-idea",
