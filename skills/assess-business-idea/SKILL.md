@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # Assess Business Idea
