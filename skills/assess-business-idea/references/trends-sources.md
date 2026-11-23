@@ -5,9 +5,12 @@ across at least two independent signals. Every trend visual carries this caveat.
 
 ## Google Trends
 Run `scripts/google_trends.py "<term>" ["<term2>" ...]` for interest-over-time JSON.
-If it returns {"status":"unavailable",...}, fall back to the Playwright browser on
-trends.google.com (navigate, read the interest-over-time chart). Treat both as
-directional.
+If it returns {"status":"unavailable",...}, record Google Trends as a gap with the reason.
+A browser read of trends.google.com is opt-in. Name the source and why, then run it only
+after the user says yes for that source. Check availability with
+`python3 -c "import playwright"` first. If that fails, say Playwright is not installed and
+skip the browser read. If the user says no, leave the gap in place. Treat both the script
+result and any browser read as directional.
 
 ## Triangulation sources (use several, note independence)
 - Reddit, niche forums, review sites (G2, Capterra, app stores) — unfiltered

@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Assess Business Idea
@@ -20,6 +20,15 @@ phase that needs a missing skill will be skipped with an inline note, or the use
 say "continue anyway." If all present, proceed silently. Always read the shared spine
 `references/INTELLIGENCE-STANDARDS.md` first to inherit
 confidence ratings, triangulation, saturation, and numeric verification.
+
+## Web access and source ethics
+- Use public sources first (Layers 1 to 3).
+- Layer 4 (Playwright) is opt-in for each source. Name the source and why, then run it only after the user says yes for that source.
+- If the user says no, or Playwright is not installed, log the source as a gap with the reason. Check availability with `python3 -c "import playwright"`.
+- Do not reuse logins or session cookies. A source behind a login is a gap unless the user reads it and pastes what they want used.
+- Run Playwright as a normal browser that identifies as automation. Do not use stealth, user-agent spoofing or other evasion.
+- LinkedIn is not a Layer 4 target. Use only content publicly visible without login through Layers 1 to 3, or content the user pastes.
+- Respect each site's terms and robots rules.
 
 ## Query / help mode
 If invoked with --help, ?, or a question about parameters, print the full reference
