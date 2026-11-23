@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.1.3"
+  version: "1.2.0"
 ---
 
 # Assess Business Idea
@@ -18,7 +18,7 @@ company-intel, deep-research, expert-panel, fact-check-workflow, frontend-design
 data-visualization, document-skills:pdf. If any are missing, name them and say each
 phase that needs a missing skill will be skipped with an inline note, or the user can
 say "continue anyway." If all present, proceed silently. Always read the shared spine
-`~/.claude/skills/shared/references/INTELLIGENCE-STANDARDS.md` first to inherit
+`references/INTELLIGENCE-STANDARDS.md` first to inherit
 confidence ratings, triangulation, saturation, and numeric verification.
 
 ## Query / help mode
