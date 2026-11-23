@@ -18,8 +18,11 @@ INJECT the skill's methodology into the prompt as a short method block.
 const COMPANY_INTEL_METHOD = `
 Apply the COMPANY-INTEL methodology: be exhaustive and transparent about what you found
 AND couldn't find; every claim needs a source; triangulate across INDEPENDENT sources
-(two sources citing the same original = one source); confidence ★★★ official/primary,
-★★ credible independent, ★ self-reported/unverified; what the company does NOT disclose
+(two sources citing the same original = one source); grade each claim with the two grades
+in Section 4 of INTELLIGENCE-STANDARDS.md, source reliability A to F and information
+credibility 1 to 6 written together (for example B2), with ⚠ for a claim another source
+contradicts; official or primary sources rate A, credible independent sources B,
+self-reported or unverified sources C or lower; what the company does NOT disclose
 is itself a finding; use real web research, never invent facts; respect each site's terms
 and robots rules; treat Layer 4 browser reads as opt-in for each source, name the source
 and why, and run only after the user says yes; log a refusal or missing Playwright as a gap
@@ -49,21 +52,21 @@ downgrades need explicit named justification); cross-panel tension is mandatory.
 ```js
 const DOSSIER_SCHEMA = { type:'object', additionalProperties:false,
   required:['name','what_it_is','ownership_structure','funding','customers_traction',
-    'product_capability','key_question_answer','threat_level','confidence','sources'],
+    'product_capability','key_question_answer','threat_level','grade','sources'],
   properties:{ name:{type:'string'}, what_it_is:{type:'string'},
     ownership_structure:{type:'string'}, funding:{type:'string'},
     customers_traction:{type:'string'}, product_capability:{type:'string'},
     key_question_answer:{type:'string'},
     threat_level:{type:'string',enum:['existential','high','moderate','low','proof-of-model-positive']},
-    confidence:{type:'string',enum:['★★★','★★','★']},
+    grade:{type:'string',pattern:'^[A-F][1-6]$'},
     sources:{type:'array',items:{type:'string'}} } };
 
 const REALISM_SCHEMA = { type:'object', additionalProperties:false,
-  required:['name','claim_tested','verdict','reasoning','revised_window_months','confidence'],
+  required:['name','claim_tested','verdict','reasoning','revised_window_months','grade'],
   properties:{ name:{type:'string'}, claim_tested:{type:'string'},
     verdict:{type:'string',enum:['realistic-and-near','realistic-but-slow','unlikely','speculative']},
     reasoning:{type:'string'}, revised_window_months:{type:'string'},
-    confidence:{type:'string',enum:['★★★','★★','★']} } };
+    grade:{type:'string',pattern:'^[A-F][1-6]$'} } };
 
 const PANEL_WAVE_SCHEMA = { type:'object', additionalProperties:false,
   required:['wave','critic_positions','wave_synthesis'],

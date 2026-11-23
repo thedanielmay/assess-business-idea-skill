@@ -20,7 +20,7 @@ the product is before seeing the score. Then: verdict hero (score animates up); 
 scorecard with a live lens toggle that re-weights and re-animates; kill-risk cards that
 flip to "why it could sink it / what would de-risk it"; must-be-true assumptions as a
 chain showing joint fragility; visible integrity panel; evidence drawer (any claim links
-to source + confidence stars + triangulation status).
+to source + the two grades in Section 4 of INTELLIGENCE-STANDARDS.md + triangulation status).
 
 ## Tier-2 visuals (open-ended; the skill selects or invents per pitch)
 Beyond the spine, choose the diagrams that best convey this pitch's findings. NOT a
