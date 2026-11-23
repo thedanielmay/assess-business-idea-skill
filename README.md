@@ -78,6 +78,8 @@ Changes are in [CHANGELOG.md](CHANGELOG.md).
   atomic evidence behind any single number.
 - Plain language throughout — no jargon, no buzzwords, complete but clear, unflinching
   but constructive.
+- Web access is opt-in for browser research, uses no login reuse or stealth, and respects
+  each site's terms and robots rules.
 
 ## Author
 

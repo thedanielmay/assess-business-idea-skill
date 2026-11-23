@@ -20,8 +20,12 @@ Apply the COMPANY-INTEL methodology: be exhaustive and transparent about what yo
 AND couldn't find; every claim needs a source; triangulate across INDEPENDENT sources
 (two sources citing the same original = one source); confidence ★★★ official/primary,
 ★★ credible independent, ★ self-reported/unverified; what the company does NOT disclose
-is itself a finding; use real web research, never invent facts; cover structure/
-ownership, funding/revenue, customers & scale, product capability TODAY, plus the
+is itself a finding; use real web research, never invent facts; respect each site's terms
+and robots rules; treat Layer 4 browser reads as opt-in for each source, name the source
+and why, and run only after the user says yes; log a refusal or missing Playwright as a gap
+with the reason; never reuse logins or session cookies; do not use stealth or user-agent
+spoofing; use LinkedIn content only when public without login or pasted by the user; cover
+structure/ownership, funding/revenue, customers & scale, product capability TODAY, plus the
 specific intelligence question posed.`;
 
 const EXPERT_PANEL_METHOD = `
