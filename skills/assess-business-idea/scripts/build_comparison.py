@@ -9,6 +9,7 @@ mode, not a lens, and is rejected. Ideas that cannot be ranked are listed with a
 reason. Writes <root>/_comparison/RANKING.md.
 """
 import json
+import math
 import os
 import re
 import sys
@@ -28,12 +29,13 @@ def score_number(value):
     if isinstance(value, bool) or value is None:
         return None
     if isinstance(value, (int, float)):
-        return value
+        return value if math.isfinite(value) else None
     if isinstance(value, str):
         try:
-            return float(value.strip())
+            number = float(value.strip())
         except ValueError:
             return None
+        return number if math.isfinite(number) else None
     return None
 
 
