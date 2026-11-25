@@ -7,8 +7,9 @@ always enter as hypotheses to verify, never as facts.
 ## Triage screens (Phase 1)
 - Real-Win-Worth-it (R-W-W): three blunt questions — is it real, can we win, is it
   worth it — used as a fast kill screen.
-- Fast legality screen: is it legal where it operates, does it need a licence the
-  founder hasn't mentioned, is a regulator actively hostile. A clear no is a fatal flaw.
+- Fast legality screen: is it legal in the recorded jurisdiction, does it need a licence
+  the founder hasn't mentioned, is a regulator actively hostile there. A clear no is a
+  fatal flaw.
 
 ## Demand and problem reality (catches: nobody actually wants this)
 - Mom Test: did people pay or commit, or just say "nice idea"? Audits every founder
@@ -34,6 +35,10 @@ always enter as hypotheses to verify, never as facts.
 ## Economics (catches: grows itself broke)
 - Unit economics sanity: LTV to CAC (target at least 3:1), CAC payback under ~12
   months, contribution margin, burn to traction. A sanity pass, not a full model.
+  Apply the 3:1 and 12 month thresholds only to recurring-revenue models. For
+  one-off sales, hardware and marketplaces, state the per unit margin and describe
+  the payback logic in words instead. Invent no new numeric thresholds for those
+  models.
 
 ## Method — what to do next (catches: validated by opinion not evidence)
 - Lean Startup riskiest-assumption test: name the single cheapest experiment to retire

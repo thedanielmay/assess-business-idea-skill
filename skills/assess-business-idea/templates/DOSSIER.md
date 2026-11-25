@@ -10,6 +10,7 @@ here; full reasoning follows.
 
 ## Idea Brief (normalized input)
 Claims vs. to-verify, problem, customer, solution, model, competitors, gaps.
+Jurisdiction: {{JURISDICTION}} (country, optionally state).
 
 ## Characterize (describe before judging)
 Product description (what it is, how it works); customers (buyer ≠ user, segmented);
