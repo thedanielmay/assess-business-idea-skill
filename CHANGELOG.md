@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.0 - 2026-11-26
+
+- Delegated skills use this skill's parameter step instead of their own scoping confirmation. Their output lands in `assessments/<slug>/evidence/` and `assessments/<slug>/competitors/`.
+- Only the confidence grade, saturation and numeric verification sections of the shared standards file are read.
+- Unit economics thresholds apply only to recurring revenue models. One-off sales, hardware and marketplaces state per unit margin and payback logic in words.
+- An axis with no cited evidence is marked EVIDENCE GAP, scores 0 and appears in the verdict.
+- Investor Founder-fit is now 15. The other nine investor cells give up 11 points in proportion to size.
+- A jurisdiction parameter is captured and drives the legality screen.
+- The comparison script reads every scorecard block and ranks by one chosen lens. Ideas without that lens are listed as not ranked.
+
 ## 1.4.0 - 2026-11-23
 
 - Confidence now uses the two grades defined in Section 4 of INTELLIGENCE-STANDARDS.md: source reliability A to F and information credibility 1 to 6, written together (for example B2). The ⚠ flag marks a claim that another source contradicts.

@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Assess Business Idea
@@ -17,9 +17,13 @@ Check whether these skills are in the session's available list: topic-intel,
 company-intel, deep-research, expert-panel, fact-check-workflow, frontend-design,
 data-visualization, document-skills:pdf. If any are missing, name them and say each
 phase that needs a missing skill will be skipped with an inline note, or the user can
-say "continue anyway." If all present, proceed silently. Always read the shared spine
-`references/INTELLIGENCE-STANDARDS.md` first to inherit
-confidence ratings, triangulation, saturation, and numeric verification.
+say "continue anyway." If all present, proceed silently.
+
+Read only three sections of the shared spine `references/INTELLIGENCE-STANDARDS.md`:
+"Confidence Rating System", "Source Saturation Rule" and "Numeric Verification Protocol".
+Inherit the two confidence grades, the saturation rule and numeric verification from
+those sections, on every run. This read is unconditional. It still happens
+after "continue anyway".
 
 ## Web access and source ethics
 - Use public sources first (Layers 1 to 3).
@@ -35,12 +39,12 @@ If invoked with --help, ?, or a question about parameters, print the full refere
 from `references/parameters.md` and STOP — do no assessment.
 
 ## Parameter resolution — explicit-or-ask (the universal rule)
-For every parameter (--input, --depth, --lens, --report): if the user specified it,
-use it. If silent, ASK via a prompt that shows the plain-language explanation from
-`references/parameters.md` so the prompt also reminds. Silence never means a silent
-default. Mark the recommended option (investor lens, standard depth) first, but the
-user still picks it. Fully-specified invocations run straight through; partial ones ask
-only about the gaps.
+For every parameter (--input, --jurisdiction, --depth, --lens, --report): if the user
+specified it, use it. If silent, ASK via a prompt that shows the plain-language
+explanation from `references/parameters.md` so the prompt also reminds. Silence never
+means a silent default. Mark the recommended option (investor lens, standard depth)
+first, but the user still picks it. Fully-specified invocations run straight through;
+partial ones ask only about the gaps.
 
 ## Pipeline (read references/frameworks.md, scorecard.md, verification.md as needed)
 All frameworks run at every tier; depth changes research rigor only. Founder claims
@@ -85,6 +89,13 @@ quick = reasoned + light web. standard = full single-pass delegation. deep = mul
 the parallel dispatch and token implication and run on the user's confirmation.
 quick/standard run inline, never dispatch the Workflow.
 
+Delegated skills do not run their own scoping confirmation round. The explicit-or-ask
+parameter step above replaces that confirmation. Once the user has answered the
+parameters, each delegated phase starts with no further gate, except one. The
+deep tier token cost confirmation still happens before any deep run. Put delegated
+research output under `assessments/<slug>/evidence/` and competitor output under
+`assessments/<slug>/competitors/`.
+
 For the deep-tier Workflow, read references/deep-tier-workflow.md FIRST — it carries the
 reusable recipe (method-injection, structured-output schemas, the per-competitor
 dossier→realism pipeline, the separate verification agent, and the regulatory-critic
@@ -97,8 +108,10 @@ purpose agent instead.
 ## Lens routing
 founder/investor/operator/consultant are combinable output transforms — render a
 section per lens and flag divergence. compare is a standalone aggregation: it leads
-with the scorecard and runs scripts/build_comparison.py over the assessments root to
-emit _comparison/RANKING.md.
+with the scorecard and runs scripts/build_comparison.py over the assessments root, to
+emit _comparison/RANKING.md. Pass the first lens other than compare that the user chose
+as the second argument. When the user chose no lens, ask which lens to rank by before
+running the script.
 
 ## Output
 On screen always: verdict, scorecard (raw × multiplier = adjusted), top 3 kill-risks,

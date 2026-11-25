@@ -18,6 +18,12 @@ Accepts a few sentences, a file path (pitch deck PDF, .md, .docx), a transcript,
 reference to something shared in the conversation ("the deck I shared"). PDFs are read
 via the pdf document skill. If you are silent, the skill asks for it.
 
+## --jurisdiction (where the business operates)
+
+Give the country, and optionally the state or region inside it. If you are silent,
+the skill asks for it with the other parameters. The recorded place drives the fast
+legality screen and the regulatory axis.
+
 ## --depth — how deep the research goes
 
 All frameworks run at every tier; depth changes only how much evidence sits behind
