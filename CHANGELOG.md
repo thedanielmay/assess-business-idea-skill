@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 - 2026-11-26
+
+- The check for a scraping service key prints only whether it is set. It never prints the key.
+
 ## 1.5.0 - 2026-11-26
 
 - Delegated skills use this skill's parameter step instead of their own scoping confirmation. Their output lands in `assessments/<slug>/evidence/` and `assessments/<slug>/competitors/`.
