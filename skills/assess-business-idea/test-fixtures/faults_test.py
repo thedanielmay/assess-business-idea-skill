@@ -49,7 +49,7 @@ class Fault_c9(unittest.TestCase):
     def test_narrow_inheritance(self):
         src = text("SKILL.md")
         self.assertNotIn("Always read", src)
-        self.assertIn("read only", src)
+        self.assertRegex(src, re.compile(r"read only", re.I))
         for heading in ("Confidence Rating System", "Source Saturation Rule",
                         "Numeric Verification Protocol"):
             self.assertIn(heading, src, "missing heading: " + heading)

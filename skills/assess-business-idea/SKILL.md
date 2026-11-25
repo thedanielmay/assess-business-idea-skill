@@ -17,10 +17,13 @@ Check whether these skills are in the session's available list: topic-intel,
 company-intel, deep-research, expert-panel, fact-check-workflow, frontend-design,
 data-visualization, document-skills:pdf. If any are missing, name them and say each
 phase that needs a missing skill will be skipped with an inline note, or the user can
-say "continue anyway." If all present, proceed silently and read only three sections of
-the shared spine `references/INTELLIGENCE-STANDARDS.md`: "Confidence Rating System",
-"Source Saturation Rule" and "Numeric Verification Protocol". Inherit the two confidence
-grades, the saturation rule and numeric verification from those sections.
+say "continue anyway." If all present, proceed silently.
+
+Read only three sections of the shared spine `references/INTELLIGENCE-STANDARDS.md`:
+"Confidence Rating System", "Source Saturation Rule" and "Numeric Verification Protocol".
+Inherit the two confidence grades, the saturation rule and numeric verification from
+those sections, on every run. This read is unconditional. It still happens
+after "continue anyway".
 
 ## Web access and source ethics
 - Use public sources first (Layers 1 to 3).
@@ -88,8 +91,9 @@ quick/standard run inline, never dispatch the Workflow.
 
 Delegated skills do not run their own scoping confirmation round. The explicit-or-ask
 parameter step above replaces that confirmation. Once the user has answered the
-parameters, each delegated phase starts with no further gate. Put delegated research
-output under `assessments/<slug>/evidence/` and competitor output under
+parameters, each delegated phase starts with no further gate, except one. The
+deep tier token cost confirmation still happens before any deep run. Put delegated
+research output under `assessments/<slug>/evidence/` and competitor output under
 `assessments/<slug>/competitors/`.
 
 For the deep-tier Workflow, read references/deep-tier-workflow.md FIRST — it carries the
@@ -104,8 +108,10 @@ purpose agent instead.
 ## Lens routing
 founder/investor/operator/consultant are combinable output transforms — render a
 section per lens and flag divergence. compare is a standalone aggregation: it leads
-with the scorecard and runs scripts/build_comparison.py over the assessments root, with
-the first lens the user chose as the second argument, to emit _comparison/RANKING.md.
+with the scorecard and runs scripts/build_comparison.py over the assessments root, to
+emit _comparison/RANKING.md. Pass the first lens other than compare that the user chose
+as the second argument. When the user chose no lens, ask which lens to rank by before
+running the script.
 
 ## Output
 On screen always: verdict, scorecard (raw × multiplier = adjusted), top 3 kill-risks,
