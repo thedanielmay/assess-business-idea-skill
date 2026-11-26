@@ -23,11 +23,15 @@ in Section 4 of INTELLIGENCE-STANDARDS.md, source reliability A to F and informa
 credibility 1 to 6 written together (for example B2), with ⚠ for a claim another source
 contradicts; official or primary sources rate A, credible independent sources B,
 self-reported or unverified sources C or lower; what the company does NOT disclose
-is itself a finding; use real web research, never invent facts; respect each site's terms
-and robots rules; treat Layer 4 browser reads as opt-in for each source, name the source
-and why, and run only after the user says yes; log a refusal or missing Playwright as a gap
-with the reason; never reuse logins or session cookies; do not use stealth or user-agent
-spoofing; use LinkedIn content only when public without login or pasted by the user; cover
+is itself a finding; use real web research, never invent facts; respect each site's terms,
+robots rules and rate limits; a 429 response means wait or log the source as a gap, never a
+browser read; when a web search or fetch fails, move to a free browser read of a public page
+automatically and name the source and why; log a failed browser read or missing Playwright
+as a gap with the reason; never solve a captcha, and log a captcha as a gap unless a person can
+reach the page; use no paid scraping service without the user's yes; never log in to a source,
+never reuse session cookies, and use
+LinkedIn content only when it is public without login or the user pasted it (LinkedIn is not a Layer 4 target); never use stealth tools or user-agent
+spoofing; for a sensitive integrity investigation, confirm with the user before any Layer 4; cover
 structure/ownership, funding/revenue, customers & scale, product capability TODAY, plus the
 specific intelligence question posed.`;
 

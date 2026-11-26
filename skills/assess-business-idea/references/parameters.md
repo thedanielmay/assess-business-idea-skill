@@ -10,7 +10,8 @@ it, the skill asks you before launching, showing the explanation below so the pr
 also reminds you of the options. Silence means "ask me," never "guess for me." There
 is no separate interactive flag — being asked is the default for anything unspecified.
 Where an option is marked "(recommended)" it is pre-selected first, but you still
-actively choose it.
+actively choose it. For every approval question, use the harness question tool when the
+user's rules require a question tool; otherwise ask in plain text.
 
 ## --input — what you're assessing
 

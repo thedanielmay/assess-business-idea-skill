@@ -78,8 +78,9 @@ Changes are in [CHANGELOG.md](CHANGELOG.md).
   atomic evidence behind any single number.
 - Plain language throughout — no jargon, no buzzwords, complete but clear, unflinching
   but constructive.
-- Web access is opt-in for browser research, uses no login reuse or stealth, and respects
-  each site's terms and robots rules.
+- A failed web search or fetch falls back to a free browser read of a public page.
+  Paid scraping stays opt in. The browser never signs in or solves a captcha. A 429 means
+  wait or log a gap. Each site's terms, robots rules and rate limits apply.
 
 ## Author
 

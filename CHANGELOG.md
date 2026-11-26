@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2 - 2026-11-26
+
+- A failed web search or fetch now moves to a free browser read of a public page automatically. The skill does not stop to ask for permission first.
+- Site terms, rate limits, sign in and captcha rules stay in force. Paid scraping services stay opt in.
+- Approval questions use the harness question tool when the user rules require one, and plain text otherwise.
+
 ## 1.5.1 - 2026-11-26
 
 - The check for a scraping service key prints only whether it is set. It never prints the key.
