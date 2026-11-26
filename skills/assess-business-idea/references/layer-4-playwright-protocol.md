@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This is the canonical Layer 4 specification. Both `company-intel` and `topic-intel` reference this file. Do not duplicate this logic inline in SKILL.md files.
+This is the canonical Layer 4 specification. The `research-intel` skill keeps its own copy of these rules. Do not duplicate this logic inline in SKILL.md files.
 
 This document covers:
 - When to escalate to Layer 4 (decision tree)

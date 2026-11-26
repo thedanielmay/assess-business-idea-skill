@@ -9,7 +9,7 @@ conversation — and runs a structured, evidence-grounded assessment that ends i
 scored verdict, a cited dossier, and an optional interactive HTML report.
 
 It is a **thin orchestrator**. It does not re-implement market research or adversarial
-critique; it delegates those to other skills (topic-intel, company-intel,
+critique; it delegates those to other skills (research-intel,
 deep-research, expert-panel, fact-check-workflow, frontend-design, data-visualization)
 and supplies the parts those skills don't: the business framework spine, the scorecard,
 verification of its own output, and the report.

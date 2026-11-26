@@ -6,10 +6,10 @@ STATE the parallel dispatch and token implication, and run only on the user's
 confirmation, before launching.
 
 ## PITFALL (this WILL bite you): skills are not agent types
-`company-intel`, `expert-panel`, `topic-intel` etc. are SKILLS. In a Workflow,
+`research-intel`, `expert-panel` etc. are SKILLS. In a Workflow,
 `agentType` resolves against the subagent registry (`general-purpose`, `Explore`, and
 any registered personas) — NOT the skill list. `agent(prompt, {agentType:
-'company-intel'})` throws `agent type 'company-intel' not found`.
+'research-intel'})` throws `agent type 'research-intel' not found`.
 
 **Fix:** use the default workflow agent (omit `agentType`, or use `general-purpose`) and
 INJECT the skill's methodology into the prompt as a short method block.

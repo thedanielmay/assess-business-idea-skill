@@ -62,5 +62,5 @@ always enter as hypotheses to verify, never as facts.
 
 ## Deliberately out of scope (avoid framework theater)
 Detailed financial modelling (use the financial-model skill), founder background
-due-diligence (use company-intel on people), full technical feasibility, ESG scoring
+due-diligence (use research-intel on people), full technical feasibility, ESG scoring
 unless the user weights it.
