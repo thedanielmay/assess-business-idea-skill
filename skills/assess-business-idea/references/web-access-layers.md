@@ -137,13 +137,17 @@ If none are configured, or the user says no, go to Layer 4 for a free browser re
 Use these paid service templates only after the user says yes for that service.
 
 ```bash
-curl -s "https://app.scrapingbee.com/api/v1/?api_key=$SCRAPINGBEE_API_KEY&url={ENCODED_URL}&render_js=true" > /tmp/scraped.html
+# The address goes in on standard input, so the key does not show in the process list.
+printf 'url = "https://app.scrapingbee.com/api/v1/?api_key=%s&url=%s&render_js=true"\n' "$SCRAPINGBEE_API_KEY" "{ENCODED_URL}" |
+  curl -s -K - > /tmp/scraped.html
 ```
 
 Use `render_js=true` for JS-rendered pages (LinkedIn, Facebook, Instagram, modern SPAs).
 Use `render_js=false` for simple HTML pages (faster, cheaper).
 
 Parse the result with Bash or Python as needed.
+
+These steps cover ScrapingBee. For ZenRows, BrightData or ScraperAPI, follow that service's own instructions. Keep the key out of the command line in the same way.
 
 ### Sites that commonly require Layer 3
 
