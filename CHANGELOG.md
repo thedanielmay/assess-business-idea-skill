@@ -3,7 +3,8 @@
 ## 1.5.4 - 2026-11-26
 
 - The ScrapingBee request goes to curl on standard input, so the key does not show in the process list.
-- Keys for other scraping services stay off the command line in the same way.
+- Keys for other scraping services go to `curl` on standard input too, never in a command argument.
+- The guide warns that a quote, a backslash or a line break in the key or address breaks the request.
 
 ## 1.5.3 - 2026-11-26
 
