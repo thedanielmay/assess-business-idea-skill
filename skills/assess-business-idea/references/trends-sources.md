@@ -6,11 +6,12 @@ across at least two independent signals. Every trend visual carries this caveat.
 ## Google Trends
 Run `scripts/google_trends.py "<term>" ["<term2>" ...]` for interest-over-time JSON.
 If it returns {"status":"unavailable",...}, record Google Trends as a gap with the reason.
-A browser read of trends.google.com is opt-in. Name the source and why, then run it only
-after the user says yes for that source. Check availability with
-`python3 -c "import playwright"` first. If that fails, say Playwright is not installed and
-skip the browser read. If the user says no, leave the gap in place. Treat both the script
-result and any browser read as directional.
+If the script fails, move to a free browser read of the public trends.google.com page
+automatically. Do not stop to ask. Check availability with `python3 -c "import playwright"`
+first. If that fails, say Playwright is not installed and leave the gap in place. Never sign
+in, solve a captcha or use a paid service without the user's yes. A 429 response means wait
+or log the gap, not a browser read. Treat both the script result and any browser read as
+directional.
 
 ## Triangulation sources (use several, note independence)
 - Reddit, niche forums, review sites (G2, Capterra, app stores) — unfiltered

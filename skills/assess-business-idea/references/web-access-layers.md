@@ -106,7 +106,7 @@ site:acnc.gov.au "{organisation name}"
 
 ## Layer 3 — Scraping Service for Blocked Sites
 
-When WebFetch returns an error, is blocked, or returns empty/meaningless content from a JS-rendered page, route the request through a scraping service.
+When WebFetch returns an error, is blocked, or returns empty or meaningless content from a JS-rendered page, ask the user before using a paid scraping service. Use a paid service only after the user says yes for it. Otherwise go to the free browser read in Layer 4.
 
 ### Check if a scraping service is available
 
@@ -126,13 +126,15 @@ Before attempting Layer 3, check whether the user has configured a scraping serv
 [ -n "${SCRAPERAPI_KEY:-}" ] && echo "SCRAPERAPI_KEY: set" || echo "SCRAPERAPI_KEY: not set"
 ```
 
-If none are configured, skip Layer 3 and note the gap in `research-log.md` with the specific URLs that need scraping. Prompt the user:
+If none are configured, or the user says no, go to Layer 4 for a free browser read. Show the message below only if that browser read has also failed, and note the gap in `research-log.md` with the specific URLs that need scraping:
 
-> "The following pages are blocked for direct access and would benefit from a scraping service. If you have a ScrapingBee, ZenRows, or similar API key, add it to your environment and I can retry these. Alternatively, these can be opened manually in a browser:
+> "The following pages stayed blocked after a free browser read. If you have a ScrapingBee, ZenRows, or similar API key, add it to your environment and I can retry these after you say yes for that service. Alternatively, these can be opened manually in a browser:
 > - [URL 1] — [what it contains]
 > - [URL 2] — [what it contains]"
 
 ### Using ScrapingBee
+
+Use these paid service templates only after the user says yes for that service.
 
 ```bash
 curl -s "https://app.scrapingbee.com/api/v1/?api_key=$SCRAPINGBEE_API_KEY&url={ENCODED_URL}&render_js=true" > /tmp/scraped.html
@@ -155,24 +157,28 @@ Parse the result with Bash or Python as needed.
 | Seek.com.au | Bot detection | `render_js=true` |
 | web.archive.org | Blocked at network level | Avoid — use CDX API instead |
 
+A login wall stays a gap. Use a paid service only after the user says yes for it.
+
 ---
 
 ## Layer 4 — Playwright for Interactive Flows
 
-Layer 4 is opt in. It is not an automatic fallback. Before any Layer 4 attempt, tell the user the source and the reason. Run the browser only after the user says yes for that source. On a no, or when Playwright is not installed, log the source as a gap with the reason. Do not use Layer 4 on a source behind a login.
+When a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask. If Playwright is not installed, log the source as a gap with the reason. Do not use the browser on a source behind a login. The browser never signs in. Respect the site's terms, robots rules and rate limits. A 429 rate limit response means wait or log the source as a gap, not a browser read. A captcha is logged as a gap unless a person can reach the page. Never solve a captcha. Use a paid scraping service only after the user says yes for it. For a sensitive integrity investigation, confirm with the user before any Layer 4.
 
-Use Playwright only when you need to:
+Move to a free browser read of a public page automatically when you need to:
 - Navigate multi-page flows (e.g., multi-step search forms)
 - Fill and submit forms programmatically
 - Handle dynamic content that changes based on user interaction
 - Scrape content that only loads after user events (scroll, click, hover)
 
+Never sign in, solve a captcha, ignore a 429 or use this fallback for a sensitive integrity investigation without user confirmation.
+
 **Full Layer 4 protocol:** Read `references/layer-4-playwright-protocol.md`.
 
 ### When to use Playwright vs Layer 3
 
-- **Use Layer 3** when a page loads all its content on initial render (even if JS-rendered) — scraping services handle this well and are faster
-- **Use Layer 4** when content requires user interaction to load (infinite scroll, button clicks, form submission on public pages), and only after the user says yes
+- **Use Layer 3** only after the user says yes for that paid service. Use it when a page loads all its content on initial render, even if JS rendered.
+- **Use Layer 4** when a search or fetch failed, or when content requires user interaction to load (infinite scroll, button clicks, form submission on public pages). The free browser read of a public page has no permission gate. A sign in, a captcha, a 429 response or a sensitive integrity investigation is logged or confirmed as above.
 
 ---
 
@@ -189,16 +195,18 @@ For each URL/source you need to access:
    → YES: Use Layer 2 (fetch that specific URL with WebFetch).
           If WebFetch succeeds: Done.
           If WebFetch times out or returns empty: Continue.
+          If WebFetch returns HTTP 429: Wait and retry, or log the source as a gap. Do not use the browser.
    → NO: Try a different search query. If still nothing: Continue.
 
-3. Is a scraping service configured ($SCRAPINGBEE_API_KEY etc.)?
-   → YES: Use Layer 3. If succeeds: Done.
-   → NO: Log the URL as a manual review item. Prompt the user.
+3. Is a paid scraping service configured ($SCRAPINGBEE_API_KEY etc.)?
+   → YES: Name the service and ask the user. Use it only after the user says yes. If succeeds: Done.
+   → NO: Go to step 4 for the free browser read.
 
-4. Does the data require interactive navigation (forms, clicks, scroll)?
-   → YES: Name the source and the reason to the user. Use Layer 4 (Playwright)
-          only after the user says yes for that source. If no, or Playwright is
-          not installed, log the gap with the reason.
+4. Did a web search or fetch fail, or does the data require interactive navigation?
+   → HTTP 429? Wait and retry, or log the source as a gap. Do not use the browser.
+   → Sensitive integrity investigation? Confirm with the user before any Layer 4.
+   → YES: Move to a free browser read of a public page automatically. Do not stop to ask.
+          Never sign in. If Playwright is not installed, log the gap with the reason.
    → NO: This is a Layer 3 problem, not Layer 4.
 
 5. None of the above worked?

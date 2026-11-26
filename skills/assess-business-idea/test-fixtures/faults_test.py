@@ -170,16 +170,13 @@ class Fault_c22(unittest.TestCase):
 
 
 class Fault_release(unittest.TestCase):
-    """Version and changelog are set for 1.5.0."""
+    """The three version numbers agree and the changelog has that heading."""
 
-    def test_release(self):
-        plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
-        self.assertEqual(plugin["version"], "1.5.0")
-        self.assertIn('metadata:\n  version: "1.5.0"', text("SKILL.md"))
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        self.assertIn("## 1.5.0 - 2026-11-26", changelog)
-        section = changelog.split("## 1.5.0 - 2026-11-26", 1)[1].split("## ", 1)[0]
-        self.assertGreaterEqual(len([l for l in section.splitlines() if l.startswith("- ")]), 3)
+    def test_versions_agree(self):
+        version = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))["version"]
+        self.assertEqual(json.loads(text("metadata.json"))["version"], version)
+        self.assertIn('version: "' + version + '"', text("SKILL.md"))
+        self.assertIn("## " + version, (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

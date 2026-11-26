@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Assess Business Idea
@@ -27,12 +27,14 @@ after "continue anyway".
 
 ## Web access and source ethics
 - Use public sources first (Layers 1 to 3).
-- Layer 4 (Playwright) is opt-in for each source. Name the source and why, then run it only after the user says yes for that source.
-- If the user says no, or Playwright is not installed, log the source as a gap with the reason. Check availability with `python3 -c "import playwright"`.
-- Do not reuse logins or session cookies. A source behind a login is a gap unless the user reads it and pastes what they want used.
+- If a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask. Check availability with `python3 -c "import playwright"`.
+- Log the source as a gap with the reason when the browser also fails or Playwright is not installed. A 429 rate limit response means wait or log the source as a gap, not a browser read.
+- Paid scraping services (Layer 3) stay opt in. Do not use one without the user's approval.
+- A source behind a login is a gap unless the user reads it and pastes what they want used. The browser never signs in. Do not reuse session cookies. A captcha is a gap unless a person can reach the page. Never solve a captcha.
+- A sensitive integrity investigation needs user confirmation before any browser read.
 - Run Playwright as a normal browser that identifies as automation. Do not use stealth, user-agent spoofing or other evasion.
 - LinkedIn is not a Layer 4 target. Use only content publicly visible without login through Layers 1 to 3, or content the user pastes.
-- Respect each site's terms and robots rules.
+- Respect each site's terms, robots rules and rate limits.
 
 ## Query / help mode
 If invoked with --help, ?, or a question about parameters, print the full reference
@@ -45,6 +47,12 @@ explanation from `references/parameters.md` so the prompt also reminds. Silence 
 means a silent default. Mark the recommended option (investor lens, standard depth)
 first, but the user still picks it. Fully-specified invocations run straight through;
 partial ones ask only about the gaps.
+
+## Asking the user
+For every approval question, use the harness question tool when the user's rules require
+a question tool. Otherwise ask in plain text. This covers parameter asks, the deep tier
+token cost confirmation, the lens choice, and any other question that needs an answer
+before work continues.
 
 ## Pipeline (read references/frameworks.md, scorecard.md, verification.md as needed)
 All frameworks run at every tier; depth changes research rigor only. Founder claims

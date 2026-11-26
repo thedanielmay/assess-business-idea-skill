@@ -487,7 +487,7 @@ echo "ZenRows:     ${ZENROWS_API_KEY:+configured}"
 
 If the import fails, say Playwright is not installed and skip Layer 4. Log each affected source as a gap with that reason.
 
-**Layer 4 protocol:** Layer 4 is opt in. Tell the user the source and the reason, then run the browser only after the user says yes for that source. The full Layer 4 execution protocol lives in `references/layer-4-playwright-protocol.md`. Read it before executing any Playwright scripts. It covers the opt-in gate, decision templates, operational security, and source logging format. Both company-intel and topic-intel reference this file.
+**Layer 4 protocol:** When a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask. The full Layer 4 execution protocol lives in `references/layer-4-playwright-protocol.md`. Read it before executing any Playwright scripts. It covers the automatic fallback, decision templates, operational security, and source logging format. Both company-intel and topic-intel reference this file.
 
 Record results in `research-log.md`. Note any unavailable tools before proceeding. Unavailable tools affect which research paths are viable.
 
@@ -500,12 +500,12 @@ All intelligence work across both skills operates within these boundaries:
 - All intelligence from publicly accessible sources only
 - No misrepresentation of identity or purpose to access information
 - No access to authenticated systems. A source behind a login is a gap unless the user reads it and pastes what they want used.
-- Do not use stealth tools or session cookies. When the user approves Layer 4, Playwright runs as a normal browser that identifies as automation.
+- Do not use stealth tools or session cookies. Playwright runs as a normal browser that identifies as automation.
 - Respect each site's terms of service and robots rules
 - Privacy Act and applicable legislation apply throughout
 - Person research covers public role only: career, public statements, professional record, institutional affiliations. Private life is out of scope.
 - LinkedIn profile views notify the profile owner. Inform the user before viewing.
-- For every Layer 4 (Playwright) attempt, tell the user the source and the reason. Run it only after a yes for that source. On a no, log the source as a gap with the reason.
+- When a web search or fetch fails, move to a free browser read of a public page automatically and record the source and the reason. If it fails, log the source as a gap with the reason. A 429 response means wait or log the gap, not a browser read. Use no paid scraping service without the user's yes. Never sign in or solve a captcha. Confirm with the user before any Layer 4 on a sensitive integrity investigation.
 
 ---
 

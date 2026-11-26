@@ -1,4 +1,4 @@
-# Layer 4 — Playwright Opt-In Protocol
+# Layer 4: Playwright Automatic Fallback Protocol
 
 ## Purpose
 
@@ -6,7 +6,7 @@ This is the canonical Layer 4 specification. Both `company-intel` and `topic-int
 
 This document covers:
 - When to escalate to Layer 4 (decision tree)
-- What to execute after the user says yes for a source (templates)
+- What to execute when a web search or fetch fails (templates)
 - What to log when Layer 4 also fails (inaccessible-sources register)
 - Public sources and sources behind a login
 - Operational security
@@ -20,7 +20,7 @@ This document covers:
 | Layer | Failure condition |
 |---|---|
 | Layer 1 (API) | Returns HTTP 4xx/5xx, empty results array, times out, or requires an unconfigured auth key |
-| Layer 2 (WebFetch) | Returns HTTP 403/429/503; returns fewer than ~200 characters of real body text; returns a bot-check page; or times out |
+| Layer 2 (WebFetch) | Returns HTTP 403 or 503; returns fewer than ~200 characters of real body text; returns a bot-check page; or times out. HTTP 429 is a rate limit, not a failure: wait or log the source as a gap |
 | Layer 2 (WebSearch) | Returns zero results, or all results are irrelevant URLs that do not contain the needed data |
 | Layer 3 (scraping service) | API key not configured; service returns 4xx; service returns the same blocked content as direct fetch |
 
@@ -31,7 +31,7 @@ A layer has **not failed** if you simply have not tried it yet. Work through lay
 All three must be true:
 - No public API exists for this source (Layer 1 inapplicable)
 - WebSearch found a URL, but WebFetch of that URL failed (Layer 2 exhausted)
-- No scraping service API key is configured (Layer 3 unavailable)
+- No paid scraping service is configured, or the user said no to using one (Layer 3 unavailable or declined)
 
 ### The decision tree
 
@@ -47,20 +47,24 @@ STEP 2 — Layer 2a: WebSearch to find the specific page URL.
    Returns relevant URL? → WebFetch that URL.
       WebFetch returns ≥200 chars of real content? → DONE.
       WebFetch returns empty/blocked/403/timeout? → STEP 3.
+      WebFetch returns HTTP 429? → Wait and retry later, or log the source as a gap. Do not switch to the browser.
    No useful URLs? → Try one alternate query. Still nothing? → STEP 3.
 
-STEP 3 — Layer 3: Is a scraping service configured?
+STEP 3: Is a paid scraping service configured?
    CHECK: for each of SCRAPINGBEE_API_KEY, ZENROWS_API_KEY and BRIGHTDATA_API_KEY, print only "set" or "not set", never the value
-   YES → Route through scraping service. Got useful data? DONE.
-         Service also blocked? → STEP 4.
-   NO  → Log URL. → STEP 4.
+   YES → Name the service and ask the user. Use it only after the user says yes for it.
+         User says yes → Route through the service. Got useful data? DONE.
+         Service also blocked? → STEP 4 with the free browser.
+         User says no → Go to STEP 4 with the free browser.
+   NO  → Go to STEP 4 with the free browser.
 
-STEP 4 — Layer 4 gate:
-   Does this source require interactive/JS content?
-   (JS-rendered SPA, infinite scroll, form submission on public pages, dynamic content)
-      YES → Name the source and the reason to the user. Ask for a yes.
-             Run Layer 4 only after the user says yes for that source (Section 2).
-             On a no, log the source as a gap with the reason (Section 3).
+STEP 4: Layer 4 automatic fallback
+   Did a web search or fetch fail, or does the source need interactive/JS content?
+   (blank JS shell, bot block, empty body, infinite scroll, form submission on public pages)
+      Site returned HTTP 429? → Wait and retry, or log the source as a gap. Do not switch to the browser.
+      Sensitive integrity investigation? → Confirm with user before any Layer 4. This case has no automatic fallback.
+      YES → Move to a free browser read of a public page automatically (Section 2). Do not stop to ask.
+             Never sign in. If Playwright is not installed, log the gap with the reason (Section 3).
       NO  → This is a Layer 3 problem, not Layer 4.
              Declare INACCESSIBLE. Log it (Section 3). Notify user if HIGH priority.
 
@@ -70,20 +74,13 @@ STEP 5 — If Layer 4 also fails:
    Continue research. Never halt on a single failed source.
 ```
 
-### Nothing is automatic
+### The browser fallback is automatic
 
-Layer 4 is opt in. For every source, tell the user the URL and the reason before any Layer 4 attempt. Run the browser only after the user says yes for that source. On a no, log the source as a gap with the reason. If Playwright is not installed, say so and log the gap with that reason. Do not use Layer 4 on a source behind a login.
-
-Ask message (show for each source before Layer 4):
-```
-Layer 4 (Playwright) requested for: [URL]
-Reason: [e.g. "JS-rendered content, WebFetch returned an empty body"]
-Action: Run only after your yes for this source.
-```
+When a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask for permission. Record the source and the reason. If Playwright is not installed, say so and log the gap with that reason. Do not use the browser on a source behind a login. The browser never signs in. Respect the site's terms, robots rules and rate limits. A 429 rate limit response means wait or log the source as a gap. Never switch to the browser on a 429. A captcha is logged as a gap unless a person can reach the page. Never solve a captcha. The automatic fallback does not apply to a sensitive integrity investigation. Confirm with user before any Layer 4 in that case. The fallback is free only. Use a paid scraping service only after the user says yes for it.
 
 ### Known JS-rendered public sources
 
-For these sources, do not attempt WebFetch. Use Layer 2 WebSearch to find the URL, then ask the user before any Layer 4 attempt:
+For these public sources, do not attempt WebFetch. Use Layer 2 WebSearch to find the URL, then move to a free browser read automatically. This fallback does not cover a paid service, a sign in, a captcha, a rate limited site or a sensitive integrity investigation:
 - `glassdoor.com`: all pages
 - `seek.com.au`: job listing detail pages
 - `productreview.com.au`: review pages
@@ -94,7 +91,7 @@ For these sources, do not attempt WebFetch. Use Layer 2 WebSearch to find the UR
 
 ## Section 2 — Layer 4 Execution Templates
 
-Playwright runs as a normal browser. It identifies as automation. Do not use stealth tools, user-agent spoofing or other evasion. Do not save or reuse session cookies.
+Playwright runs as a normal browser. It identifies as automation. Use public pages only. Do not sign in or solve a captcha. Do not use stealth tools, user-agent spoofing or other evasion. Do not save or reuse session cookies.
 
 ### Pre-flight check (run once per session)
 
@@ -275,7 +272,7 @@ else:
 PYEOF
 ```
 
-**Retry rules:** Max 2 retries (3 attempts total). Back-off: 3s after attempt 1, 6s after attempt 2. If all retries return fewer than 200 chars: declare Layer 4 failed → Section 3 logging.
+**Retry rules:** Max 2 retries (3 attempts total). Back-off: 3s after attempt 1, 6s after attempt 2. A 429 response means wait or log the gap, not retry into the browser. If all retries return fewer than 200 chars: declare Layer 4 failed → Section 3 logging.
 
 ---
 
@@ -314,7 +311,7 @@ These gaps affect the [section name] section.
 Options:
   a. Continue without this data (gaps flagged clearly in deliverable)
   b. Open these URLs manually and paste relevant content here
-  c. Re-run with a scraping service configured
+  c. Re-run with a paid scraping service configured, after you say yes for it
 
 Which would you prefer? (default: a)
 ```
