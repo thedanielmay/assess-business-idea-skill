@@ -3,7 +3,7 @@ name: assess-business-idea
 description: "Exhaustive, market-based, empirical, and critical assessment of a business idea or pitch. Use when the user wants to evaluate, validate, stress-test, or pressure-test a business idea, startup concept, or pitch deck; decide whether to pursue, fund, or back a venture; or compare several ideas. Triggers include: 'assess this idea', 'validate this business', 'is this pitch any good', 'should I pursue this', 'evaluate this startup', 'review this pitch deck', 'compare these ideas'. Produces a scored verdict, a cited dossier, and an optional interactive HTML report."
 license: MIT
 metadata:
-  version: "1.5.2"
+  version: "1.5.3"
 ---
 
 # Assess Business Idea
@@ -13,8 +13,8 @@ assessment." This skill is a thin orchestrator: it delegates research and critiq
 other skills and owns the business spine, scorecard, verification, and report.
 
 ## Dependency Check
-Check whether these skills are in the session's available list: topic-intel,
-company-intel, deep-research, expert-panel, fact-check-workflow, frontend-design,
+Check whether these skills are in the session's available list: research-intel,
+deep-research, expert-panel, fact-check-workflow, frontend-design,
 data-visualization, document-skills:pdf. If any are missing, name them and say each
 phase that needs a missing skill will be skipped with an inline note, or the user can
 say "continue anyway." If all present, proceed silently.
@@ -67,11 +67,11 @@ enter as hypotheses to verify, never as facts. The pipeline diagram is authorita
   reference it; the report leads with the product description.
 - Phase 1 TRIAGE GATE — R-W-W + fast legality screen. Fatal flaw (illegal,
   structurally-zero market, no conceivable wedge, banned) → emit KILL verdict and STOP.
-- Phase 2 MARKET — delegate to topic-intel: bottom-up TAM/SAM/SOM, Five Forces, trends
+- Phase 2 MARKET — delegate to research-intel (topic mode): bottom-up TAM/SAM/SOM, Five Forces, trends
   triangulation (see references/trends-sources.md; directional only).
 - Phase 3 DEMAND — delegate to deep-research for adversarially-verified demand; Mom
   Test audit of founder claims; Jobs To Be Done reframe.
-- Phase 4 COMPETITION — company-intel per rival; positioning map; analog case studies.
+- Phase 4 COMPETITION — research-intel (company mode) per rival; positioning map; analog case studies.
 - Phase 5 MOAT+ECON+REGULATORY — 7 Powers; unit-economics sanity; regulatory/licensing/
   compliance and trajectory. Enrich the Phase 0.5 risk register into the analyzed/scored
   version here (deep tier: risk drill-down + failure scenarios).
@@ -92,7 +92,7 @@ enter as hypotheses to verify, never as facts. The pipeline diagram is authorita
 
 ## Depth modulation
 quick = reasoned + light web. standard = full single-pass delegation. deep = multi-wave
-+ OSINT + company-intel per rival + 4-critic panel; wrap the parallel fan-out of Phase
++ OSINT + research-intel (company mode) per rival + 4-critic panel; wrap the parallel fan-out of Phase
 4 (per-competitor + per-analog agents) and Phase 6 (4 critics) in a Workflow — STATE
 the parallel dispatch and token implication and run on the user's confirmation.
 quick/standard run inline, never dispatch the Workflow.
@@ -107,7 +107,7 @@ research output under `assessments/<slug>/evidence/` and competitor output under
 For the deep-tier Workflow, read references/deep-tier-workflow.md FIRST — it carries the
 reusable recipe (method-injection, structured-output schemas, the per-competitor
 dossier→realism pipeline, the separate verification agent, and the regulatory-critic
-3-wave panel). PITFALL: `company-intel` and `expert-panel` are SKILLS, not registered
+3-wave panel). PITFALL: `research-intel` and `expert-panel` are SKILLS, not registered
 agent personas. In a Workflow, `agentType` resolves against the subagent registry
 (general-purpose, Explore, …), NOT the skill list — passing a skill name as `agentType`
 throws. Inject the skill's methodology into the prompt and use the default/general-

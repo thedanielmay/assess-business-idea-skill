@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.3 - 2026-11-26
+
+- The skill delegates research to research-intel, which replaces company-intel and topic-intel.
+
 ## 1.5.2 - 2026-11-26
 
 - A failed web search or fetch now moves to a free browser read of a public page automatically. The skill does not stop to ask for permission first.

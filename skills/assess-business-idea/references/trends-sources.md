@@ -16,8 +16,8 @@ directional.
 ## Triangulation sources (use several, note independence)
 - Reddit, niche forums, review sites (G2, Capterra, app stores) — unfiltered
   complaints = real pain and incumbent weakness.
-- Funding flows (Crunchbase-style, via company-intel) — where smart money is moving.
-- Job postings and patents (OSINT, via topic-intel) — what incumbents are quietly
+- Funding flows (Crunchbase-style, via research-intel, company mode) — where smart money is moving.
+- Job postings and patents (OSINT, via research-intel, topic mode) — what incumbents are quietly
   building.
 - Exploding-topics-style early-signal sites — rising niches.
 

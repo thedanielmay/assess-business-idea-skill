@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the universal standards that govern all intelligence work across the `company-intel` and `topic-intel` skills. Both skills reference this file. When a standard is updated here, both skills pick it up automatically.
+This document defines the universal standards that govern all intelligence work in the company mode and topic mode of research work. This file is this skill's own copy. Company mode and topic mode are the two modes of the `research-intel` skill.
 
 **Read this at the start of every investigation.**
 
@@ -134,7 +134,7 @@ Run research in waves as defined by each skill. The universal rules:
 
 - **Wave 1** must complete before Wave 2 begins (foundation/identity confirmation)
 - **Wave 2** runs in parallel across multiple source types
-- **Wave 2 threshold gate:** If primary source identification returns fewer than the minimum substantive sources for any KIT (company-intel: 2 independent sources; topic-intel: 3 substantive sources), pause and report to the user before proceeding to Wave 3. Do not build synthesis on a thin evidence base.
+- **Wave 2 threshold gate:** If primary source identification returns fewer than the minimum substantive sources for any KIT (company mode: 2 independent sources; topic mode: 3 substantive sources), pause and report to the user before proceeding to Wave 3. Do not build synthesis on a thin evidence base.
 - Waves 3–5 may run in parallel within their wave
 
 ### Progress reporting (mandatory)
@@ -440,14 +440,14 @@ The two intelligence skills are complementary and must route to each other at na
 
 | Subject type | Use |
 |---|---|
-| Named legal entity (company, charity, trust, government agency) | company-intel |
-| Industry, market, or sector (not one specific company) | topic-intel |
-| Policy, framework, standard, regulation | topic-intel |
-| Technology category or product class | topic-intel |
-| Geographic area or community | topic-intel |
-| Trend, movement, or time-bounded phenomenon | topic-intel |
-| Public figure (not a company they run) | topic-intel |
-| Scientific or academic field | topic-intel |
+| Named legal entity (company, charity, trust, government agency) | company mode |
+| Industry, market, or sector (not one specific company) | topic mode |
+| Policy, framework, standard, regulation | topic mode |
+| Technology category or product class | topic mode |
+| Geographic area or community | topic mode |
+| Trend, movement, or time-bounded phenomenon | topic mode |
+| Public figure (not a company they run) | topic mode |
+| Scientific or academic field | topic mode |
 | Ambiguous — could be company or topic | Show disambiguation prompt |
 
 ### Disambiguation prompt (show when ambiguous)
@@ -455,22 +455,22 @@ The two intelligence skills are complementary and must route to each other at na
 ```
 Is this research about the organisation itself, or the broader topic/landscape?
 
-  C — The organisation [Name]       → company-intel (dossier, people, financials)
-  T — The broader topic or sector   → topic-intel (market, policy, ecosystem)
-  B — Both                          → company-intel first, then topic-intel for context
+  C — The organisation [Name]       → company mode (dossier, people, financials)
+  T — The broader topic or sector   → topic mode (market, policy, ecosystem)
+  B — Both                          → company mode first, then topic mode for context
 
 (C / T / B)
 ```
 
-**If C:** Use company-intel.
-**If T:** Use topic-intel.
-**If B:** Run company-intel for the entity first. When reaching Phase 10 (Industry & Market), invoke topic-intel (Module MKT or POL) for sector-level work rather than running a lightweight market analysis inside company-intel.
+**If C:** Use company mode.
+**If T:** Use topic mode.
+**If B:** Run research-intel in company mode for the entity first. When reaching Phase 10 (Industry & Market), invoke topic mode (Module MKT or POL) for sector-level work rather than running a lightweight market analysis inside company mode.
 
 ### Natural hand-off points
 
-- **company-intel → topic-intel:** Phase 10 (Industry & Market Context) — when the sector itself is a primary KIT, not just background context
-- **topic-intel → company-intel:** Module MKT Phase M2 (Key Player Identification) — when a specific organisation warrants deep entity research
-- **topic-intel → company-intel:** Module GEO Phase G2 (Anchor Institution Mapping) — when a named anchor institution warrants full entity research
+- **company mode → topic mode:** Phase 10 (Industry & Market Context) — when the sector itself is a primary KIT, not just background context
+- **topic mode → company mode:** Module MKT Phase M2 (Key Player Identification) — when a specific organisation warrants deep entity research
+- **topic mode → company mode:** Module GEO Phase G2 (Anchor Institution Mapping) — when a named anchor institution warrants full entity research
 
 ---
 
@@ -488,7 +488,7 @@ echo "ScraperAPI:  ${SCRAPERAPI_KEY:+configured}"
 
 If the import fails, say Playwright is not installed and skip Layer 4. Log each affected source as a gap with that reason.
 
-**Layer 4 protocol:** When a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask. The full Layer 4 execution protocol lives in `references/layer-4-playwright-protocol.md`. Read it before executing any Playwright scripts. It covers the automatic fallback, decision templates, operational security, and source logging format. Both company-intel and topic-intel reference this file.
+**Layer 4 protocol:** When a web search or fetch fails, move to a free browser read of a public page automatically. Do not stop to ask. The full Layer 4 execution protocol lives in `references/layer-4-playwright-protocol.md`. Read it before executing any Playwright scripts. It covers the automatic fallback, decision templates, operational security, and source logging format. Both company mode and topic mode reference this file.
 
 Record results in `research-log.md`. Note any unavailable tools before proceeding. Unavailable tools affect which research paths are viable.
 
@@ -554,7 +554,7 @@ Status: CLEAR / ISSUES RESOLVED / ISSUES OUTSTANDING
 
 This document is the single source of truth for shared intelligence standards. When updating:
 
-- Changes here apply to both company-intel and topic-intel immediately
+- This copy belongs to this skill. The `research-intel` skill keeps its own copy
 - Do not duplicate these standards in the individual SKILL.md files — reference this document instead
 - When a standard needs to be skill-specific (e.g. different wave thresholds), note the variation here rather than creating separate copies
 - Review this document when either skill undergoes major revision
