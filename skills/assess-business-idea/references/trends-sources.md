@@ -9,7 +9,7 @@ If it returns {"status":"unavailable",...}, record Google Trends as a gap with t
 If the script fails, move to a free browser read of the public trends.google.com page
 automatically. Do not stop to ask. Check availability with `python3 -c "import playwright"`
 first. If that fails, say Playwright is not installed and leave the gap in place. Never sign
-in, solve a captcha or use a paid service without the user's yes. A 429 response means wait
+in or solve a captcha. Ask the user before a paid service. A 429 response means wait
 or log the gap, not a browser read. Treat both the script result and any browser read as
 directional.
 

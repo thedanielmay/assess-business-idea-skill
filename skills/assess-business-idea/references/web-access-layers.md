@@ -171,7 +171,7 @@ Move to a free browser read of a public page automatically when you need to:
 - Handle dynamic content that changes based on user interaction
 - Scrape content that only loads after user events (scroll, click, hover)
 
-Never sign in, solve a captcha, ignore a 429 or use this fallback for a sensitive integrity investigation without user confirmation.
+Never sign in or solve a captcha. Never ignore a 429. Ask the user before this fallback in a sensitive integrity investigation.
 
 **Full Layer 4 protocol:** Read `references/layer-4-playwright-protocol.md`.
 

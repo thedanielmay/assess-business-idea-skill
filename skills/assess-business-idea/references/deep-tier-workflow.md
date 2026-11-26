@@ -29,7 +29,8 @@ browser read; when a web search or fetch fails, move to a free browser read of a
 automatically and name the source and why; log a failed browser read or missing Playwright
 as a gap with the reason; never solve a captcha, and log a captcha as a gap unless a person can
 reach the page; use no paid scraping service without the user's yes; never log in to a source,
-never use LinkedIn, and never reuse session cookies; never use stealth tools or user-agent
+never reuse session cookies, and use
+LinkedIn content only when it is public without login or the user pasted it (LinkedIn is not a Layer 4 target); never use stealth tools or user-agent
 spoofing; for a sensitive integrity investigation, confirm with the user before any Layer 4; cover
 structure/ownership, funding/revenue, customers & scale, product capability TODAY, plus the
 specific intelligence question posed.`;
